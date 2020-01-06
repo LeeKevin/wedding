@@ -11,15 +11,9 @@ h4 {
   text-transform: capitalize;
   letter-spacing: 0;
   font-size: 18px;
-}
 
-img {
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
-
-  &.banner {
-    width: 100%;
-    max-width: 575px;
+  a.map-location + & {
+    margin-top: 0;
   }
 }
 
@@ -65,6 +59,24 @@ article {
 
 #content {
   flex: 3;
+
+  img {
+    &.banner {
+      width: 100%;
+      max-width: 575px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 16px;
+      display: block;
+
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
+    }
+  }
+
+  ul {
+    margin-left: 16px;
+  }
 }
 
 #itinerary-nav {
@@ -107,15 +119,6 @@ article {
   z-index: 0;
   transition: transform 0.15s ease-out 0s;
 
-  &.hover {
-    transform: scale(1.12);
-    z-index: 100;
-
-    .map-marker__label {
-      opacity: 1;
-    }
-  }
-
   &.active {
     transform: scale(1.12);
     z-index: 100;
@@ -123,6 +126,16 @@ article {
     .map-marker__inner, .map-marker__point {
       background-color: #ed4c4f;
       color: #ffffff;
+    }
+  }
+
+  &.hover {
+    transform: scale(1.12);
+    z-index: 101 !important;
+
+    .map-marker__label {
+      opacity: 1;
+      z-index: 101 !important;
     }
   }
 
@@ -175,7 +188,7 @@ article {
     transition: all 0.15s ease-out 0s !important;
 
     width: max-content !important;
-    max-width: 134px !important;
+    max-width: 145px !important;
 
     overflow-wrap: break-word !important;
     font-size: 12px !important;
@@ -194,6 +207,11 @@ article {
 
 .map-location {
   visibility: hidden;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  overflow: hidden;
+  display: inline-block;
 }
 
 .itinerary {

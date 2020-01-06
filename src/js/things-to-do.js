@@ -1,8 +1,12 @@
 import React from './_includes/no-react'
 import scrollToElement from 'scroll-to-element'
 
+const defaultZoom = 13
+const defaultCenter = { lat: 51.0446, lng: -114.0526 }
+
 let map = null
-const markers = []
+let markers = []
+let currentSection = null
 
 function inView(elem) {
     const bounding = elem.getBoundingClientRect()
@@ -40,6 +44,7 @@ function prepareSections(sections) {
     })
 
     if (sections.length) {
+        currentSection = sections[defaultSectionIndex]
         handleSectionLinkClick(defaultSectionIndex, sections, sectionLinks)
     }
 
@@ -55,6 +60,9 @@ function handleSectionLinkClick(index, sections, sectionLinks) {
 
     section.classList.remove('hidden')
     sectionLink.classList.add('selected')
+    currentSection = section
+
+    loadItineraryMap(section)
 }
 
 function handleMapPosition() {
@@ -176,6 +184,8 @@ function createMapMarker({ OverlayView = google.maps.OverlayView, latlng, map, n
                 this.el.parentNode.removeChild(this.el)
                 this.el = null
             }
+
+            this.setMap(null)
         }
 
         getPosition() {
@@ -188,6 +198,51 @@ function createMapMarker({ OverlayView = google.maps.OverlayView, latlng, map, n
     }
 
     return new MapMarker()
+}
+
+function loadItineraryMap(section) {
+    // Clear existing markers
+    markers.forEach((marker) => marker.remove())
+    markers = []
+
+    // Get zoom and center location
+    const lat = parseFloat(section.getAttribute('data-lat'))
+    const long = parseFloat(section.getAttribute('data-long'))
+    const zoom = parseFloat(section.getAttribute('data-zoom'))
+    map.panTo(lat && long
+        ? new google.maps.LatLng(lat, long)
+        : new google.maps.LatLng(defaultCenter.lat, defaultCenter.lng))
+    map.setZoom(zoom || defaultZoom)
+
+    // Add Markers
+    Array.from(section.querySelectorAll('.map-location')).forEach((location, i) => {
+        let marker = createMapMarker({
+            latlng: new google.maps.LatLng(
+                parseFloat(location.getAttribute('data-lat')),
+                parseFloat(location.getAttribute('data-long'))
+            ),
+            map: map,
+            number: i + 1,
+            label: location.innerText || location.text || '',
+        })
+        markers.push(marker)
+
+        google.maps.event.addListener(marker, 'click', (e) => {
+            scrollToElement(location, {
+                offset: -50,
+                ease: 'outQuint',
+                duration: 1000
+            });
+        })
+
+        google.maps.event.addListener(marker, 'mouseover', () => {
+            marker.el.classList.add('hover')
+        })
+
+        google.maps.event.addListener(marker, 'mouseout', () => {
+            marker.el.classList.remove('hover')
+        })
+    })
 }
 
 function initMap() {
@@ -356,8 +411,8 @@ function initMap() {
         }
     ]
     map = new google.maps.Map(mapEl, {
-        center: { lat: 51.0446, lng: -114.0526 },
-        zoom: 13,
+        center: defaultCenter,
+        zoom: defaultZoom,
         zoomControlOptions: {
             position: google.maps.ControlPosition.RIGHT_CENTER
         },
@@ -368,38 +423,14 @@ function initMap() {
         styles,
     })
 
-    // Add Markers
-    Array.from(document.querySelectorAll('.map-location')).forEach((location, i) => {
-        let marker = createMapMarker({
-            latlng: new google.maps.LatLng(
-                parseFloat(location.getAttribute('data-lat')),
-                parseFloat(location.getAttribute('data-long'))
-            ),
-            map: map,
-            number: i + 1,
-            label: location.innerText || location.text || '',
-        })
-        markers.push(marker)
-
-        google.maps.event.addListener(marker, 'click', (e) => {
-            scrollToElement(location, {
-                offset: -50,
-                ease: 'outQuint',
-                duration: 1000
-            });
-        })
-
-        google.maps.event.addListener(marker, 'mouseover', () => {
-            marker.el.classList.add('hover')
-        })
-
-        google.maps.event.addListener(marker, 'mouseout', () => {
-            marker.el.classList.remove('hover')
-        })
-    })
-
     container.classList.add('active')
     handleMapPosition()
+
+    let initialSection = currentSection
+    if (!initialSection) initialSection = document.querySelector('section.itinerary')
+    if (initialSection) {
+        loadItineraryMap(initialSection)
+    }
 }
 
 window.initMap = initMap
