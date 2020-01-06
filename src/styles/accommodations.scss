@@ -1,0 +1,23 @@
+@import "_includes/plain";
+@import "_includes/split";
+@import "_includes/accordion";
+
+p {
+  margin-bottom: 10px;
+}
+
+img {
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
+
+  &.banner {
+    width: 100%;
+    max-width: 575px;
+  }
+}
+
+.heading + .subheading {
+  display: block;
+  margin-top: 1em;
+}
+

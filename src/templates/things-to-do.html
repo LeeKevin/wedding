@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Things To Do - {{ siteName }}</title>
+
+    {{>meta }}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQwISWV9DQlYLwdudzHAreE9I2r3V445I&callback=initMap"
+            async defer></script>
+</head>
+<body>
+{{> header title="Things To Do" }}
+<article>
+    <div id="content">
+        <div class="container">
+            <h2>Things To Do</h2>
+
+            <p style="text-align: center; max-width: 400px; margin: 0 auto;">
+                Spending an extra day or two and looking to explore the area?
+                Here are some itineraries that take you to our favourite spots:
+            </p>
+
+            <div id="itinerary-nav">
+            </div>
+            <section class="itinerary default">
+                <h3>East Village - Inglewood</h3>
+                <p>
+                    East Village and Inglewood are two neighbourhoods with trendy
+                    restaurants, bars, and independent shops that contribute to a hipster/artsy reputation.
+                    Situated along the Bow River, these neighbourhoods are connected by the scenic Riverwalk and combine
+                    for a nice walking tour.
+                </p>
+
+                <h4>1. Calgary Central Library</h4>
+                <a class="map-location" data-lat="51.0453" data-long="-114.0549">Central Library</a>
+
+                <p>
+                    The new Central Library opened on November 1, 2018 and was named on Time Magazine's 2019 list of
+                    greatest places. The western red cedar and the shape of the building (cloud arches formed by Chinook
+                    winds) are tributes to the natural beauty that surrounds Calgary.
+                </p>
+                <p>
+                    The building opens at 9:00 AM (12:00 PM on Sundays). Be sure to also get photos of the restored St.
+                    Louis Hotel next door.
+                </p>
+
+                <div>
+                    <img class="banner" src="/images/things/central-library.jpg"/>
+                </div>
+
+                <h4>
+                    2 - 4. Breakfast at the Simmons Building
+                </h4>
+                <a class="map-location" data-lat="51.045915" data-long="-114.050702">5th St Square</a>
+                <p>
+                    Leaving the library, make your way to
+                </p>
+                <p>
+                    Start with breakfast at Sidewalk Citizen in the Simmons building on the edge of the Bow River, which
+                    was
+                    built in 1912 and used to serve as a mattress factory. Grab a coffee at Phil & Sebastian before
+                    heading
+                    out the back door to explore the Riverwalk and St. Patrick's Island. Walk along the Riverwalk and
+                    check
+                    out the murals and the west-facing view of downtown Calgary before crossing the pedestrian bridge
+                    onto
+                    St. Patrick's island. While on the island, check out the urban art, walking pathways and pedestrian
+                    bridges. Be sure to stop at The Rise for a great view of the city.
+                </p>
+
+                <p>
+                    From St. Patrick's island, head southwest to take in the Device to Root out Evil art installation at
+                    5th
+                    St Square (5 St SE and 7 Ave SE) before heading to the Calgary Public Library. If you've got a bit
+                    more
+                    time, swing by Fort Calgary for..
+                </p>
+                <a class="map-location" data-lat="51.0480" data-long="-114.0560">Third</a>
+
+
+                <p>
+                    From the library, walk east along 12 St SE into Inglewood and stop for lunch at Without Papers
+                    Pizza,
+                    Spolumbo's or The Nash, then stroll through the shops on 9 Ave SE (The Livery Shop is definitely
+                    worth a
+                    browse).
+                </p>
+                <p>
+                    Finish the day off with dinner at one of the following restaurants:
+                </p>
+                <ul>
+                    <li>Pho Hoai in the Far East Shopping Centre (closes at 6PM Sundays, 8PM the rest of the week)</li>
+                    <li>Sun's BBQ for Szechuan and Malay</li>
+                    <li>Ten Foot Henry</li>
+                    <li>Two Penny</li>
+                    <li>Native Tongues</li>
+                </ul>
+
+                <p>
+                    Top it off with a nightcap at one of the following spots:
+                </p>
+
+                <ul>
+                    <li>Village Ice Cream</li>
+                    <li>Proof</li>
+                    <li>Shelter</li>
+                    <li>St. James Pub</li>
+                    <li>Civic Tavern (formerly Hop in Brew)</li>
+                </ul>
+            </section>
+            <section class="itinerary">
+                <h3>Mission - 17th - Downtown</h3>
+            </section>
+            <section class="itinerary">
+                <h3>Banff</h3>
+            </section>
+        </div>
+    </div>
+    <div id="map-container">
+        <div id="map-wrapper">
+            <div id="map"></div>
+        </div>
+    </div>
+</article>
+{{> footer }}
+</body>

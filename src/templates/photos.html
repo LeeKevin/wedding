@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Photos - {{ siteName }}</title>
+
+    {{>meta }}
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1/dist/js/lightgallery.min.js"></script>
+</head>
+<body>
+{{> header title=Photos }}
+<article>
+    <div class="container">
+        <h2>Photos</h2>
+        <div id="grid" class="grid">
+            {{#each images}}
+            <div class="grid-item" data-src="{{this}}"><img src="{{this}}"/></div>
+            {{/each}}
+        </div>
+    </div>
+</article>
+{{> footer }}
+</body>

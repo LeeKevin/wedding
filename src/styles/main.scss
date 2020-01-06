@@ -1,0 +1,59 @@
+@import "normalize-scss/sass/normalize";
+
+@include normalize();
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@import "theme";
+@import "_includes/fonts";
+@import "_includes/header";
+@import "_includes/footer";
+@import "_includes/buttons";
+@import "_includes/form";
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+
+  font-family: $font-family;
+  color: $default-font-color;
+}
+
+article {
+  min-height: 400px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover, &:visited {
+    color: inherit;
+  }
+
+  &:hover {
+    border-bottom: 1px solid currentColor;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 48px;
+
+  max-width: 1000px;
+
+  @media (max-device-width: 500px), (max-width: 520px) {
+    padding: 0 32px;
+  }
+}
+
+p, li {
+  line-height: 1.6;
+}

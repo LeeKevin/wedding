@@ -1,0 +1,16 @@
+$font-family: "Publico Text Roman", serif;
+$header-font-family: "Tenez", serif;
+$script-font-family: "Batrisyia Script Alternates", sans-serif;
+$logo-font-family: "Baskerville", serif;
+$sans-serif-font-family: 'Barlow', sans-serif;
+
+$default-font-color: #31313a;
+
+
+@mixin clearfix() {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
