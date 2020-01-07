@@ -92,6 +92,11 @@ function handleMapPosition() {
 
             if (marker.el) {
                 if (!foundVisibleLocation && inView(location)) {
+                    const zoom = location.getAttribute('data-zoom')
+                    if (zoom) {
+                        map.setZoom(parseFloat(zoom))
+                    }
+
                     marker.el.classList.add('active')
                     map.panTo(marker.getPosition())
 
