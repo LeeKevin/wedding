@@ -79,37 +79,39 @@ function handleMapPosition() {
         wrapper.setAttribute('style', '')
     }
 
-    // Now check for visible map locations in content.
-    // Highlight them on map
-    const locations = Array.from(document.querySelectorAll('.map-location'))
+    if (currentSection) {
+        // Now check for visible map locations in content.
+        // Highlight them on map
+        const locations = Array.from(currentSection.querySelectorAll('.map-location'))
 
-    let foundVisibleLocation = false
-    let i = 0
-    while (i < locations.length && i < markers.length) {
-        const location = locations[i]
-        const marker = markers[i]
+        let foundVisibleLocation = false
+        let i = 0
+        while (i < locations.length && i < markers.length) {
+            const location = locations[i]
+            const marker = markers[i]
 
-        if (marker.el) {
-            if (!foundVisibleLocation && inView(location)) {
-                marker.el.classList.add('active')
-                map.panTo(marker.getPosition())
+            if (marker.el) {
+                if (!foundVisibleLocation && inView(location)) {
+                    marker.el.classList.add('active')
+                    map.panTo(marker.getPosition())
 
-                let locationSibling = location.nextElementSibling
-                while (locationSibling && locationSibling.classList.contains('map-location')) {
-                    i++
+                    let locationSibling = location.nextElementSibling
+                    while (locationSibling && locationSibling.classList.contains('map-location')) {
+                        i++
 
-                    const siblingMarker = markers[i]
-                    siblingMarker.el.classList.add('active')
-                    locationSibling = locationSibling.nextElementSibling
+                        const siblingMarker = markers[i]
+                        siblingMarker.el.classList.add('active')
+                        locationSibling = locationSibling.nextElementSibling
+                    }
+
+                    foundVisibleLocation = true
+                } else {
+                    marker.el.classList.remove('active')
                 }
-
-                foundVisibleLocation = true
-            } else {
-                marker.el.classList.remove('active')
             }
-        }
 
-        i++
+            i++
+        }
     }
 }
 
