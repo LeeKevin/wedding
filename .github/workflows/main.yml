@@ -1,4 +1,4 @@
-name: CI
+name: Build and Deploy
 
 on:
   push:	
@@ -17,7 +17,7 @@ jobs:
         persist-credentials: false
     - name: Build
       uses: actions/setup-node@v1
-    - run: npm run build
+    - run: npm install && npm run build
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
