@@ -1,3 +1,4 @@
+import './_includes/addevent'
 const Details = require('./_includes/accordion')
 
 window.addEventListener('load', function () {

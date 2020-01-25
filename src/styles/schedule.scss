@@ -1,6 +1,7 @@
 @import "_includes/plain";
 @import "_includes/split";
 @import "_includes/accordion";
+@import "_includes/addevent";
 
 p {
   margin-bottom: 10px;
@@ -21,15 +22,6 @@ img {
   margin-top: 1em;
 }
 
-.addeventatc {
+.add-to-calendar {
   display: none;
-  font-size: 10px !important;
-
-  .addeventatc_icon {
-    background-size: 14px 14px !important;
-  }
-
-  .copyx {
-    display: none !important;
-  }
 }

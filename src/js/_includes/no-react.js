@@ -21,7 +21,7 @@ const React = {
             let child = arguments[i];
             element.appendChild(
                 child.nodeType == null ?
-                    document.createTextNode(child.toString()) : child);
+                    document.createTextNode(child ? child.toString() : '') : child);
         }
 
         return element;
