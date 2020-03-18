@@ -120,6 +120,9 @@ class InviteResponse extends React.PureComponent {
                         <option value="Mushroom">
                             Wild Mushroom Ravioli (V)
                         </option>
+                        <option value="Kids">
+                            Kid's Option (TBD)
+                        </option>
                     </select>
                 </div>
             }
