@@ -226,6 +226,52 @@ $toggle-menu-section-border: 1px solid #e7e7e7;
   }
 }
 
+.covid-banner {
+  padding: 4px;
+  max-width: 1000px;
+  margin: 16px auto 0;
+  font-size: 14px;
+
+  line-height: 1.5;
+  background: #ff8b3d;
+  color: #ffffff;
+  border-radius: 3px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  .fa {
+    font-size: 20px;
+    margin: 0 32px;
+  }
+
+  > div {
+    padding: 4px 8px;
+    background: #fff;
+    color: #666666;
+    border-radius: 2px;
+  }
+
+  p {
+    max-width: 100%;
+    width: 100%;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-device-width: 700px), (max-width: 720px) {
+    text-align: center;
+    flex-direction: column;
+
+    .fa {
+      margin: 16px 0;
+    }
+  }
+}
+
 
 // Responsive
 
