@@ -440,12 +440,12 @@ class RSVP extends React.Component {
                 isComplete
                     ? <p>
                         Thank you for your RSVP. You can revisit this page to check or update your RSVP
-                        details until <strong>July 8, 2020</strong>.
+                        details until <strong>July 28, 2021</strong>.
                     </p>
                     : <div>
                         <p>
                             We're excited to celebrate with you! We truly hope you can join us. Please RSVP by&nbsp;
-                            <strong style={{ display: 'inline-block' }}>July 8, 2020</strong>.
+                            <strong style={{ display: 'inline-block' }}>June 28, 2021</strong>.
                         </p>
                         {
                             invitee
