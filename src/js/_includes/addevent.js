@@ -69,8 +69,8 @@ const AddToCalendar = (function () {
 
     function buildGoogleUrl(eventData) {
         // We pass timezone as an arg, so use naive time
-        const startDate = formatTime(new Date(eventData.start)).slice(0, -1)
-        const endDate = formatTime(new Date(eventData.end)).slice(0, -1)
+        const startDate = formatTime(new Date(eventData.start), eventData.timezone)
+        const endDate = formatTime(new Date(eventData.end), eventData.timezone)
 
         const googleArgs = {
             'text': (eventData.title || ''),
