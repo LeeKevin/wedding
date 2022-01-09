@@ -1,5 +1,3 @@
-import prepareLogin from './_includes/login'
-
 if (!String.prototype.includes) {
     String.prototype.includes = function (search, start) {
         'use strict'
@@ -65,10 +63,7 @@ function setHeaderClasses() {
     }
 }
 
-
 window.addEventListener('load', function () {
-    prepareLogin()
-
     setHeaderClasses()
 
     // page is fully rendered

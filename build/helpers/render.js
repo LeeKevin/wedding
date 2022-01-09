@@ -1,6 +1,7 @@
 var handlebars = require('handlebars')
 var fs = require('fs')
 var path = require('path')
+var defaultHelpers = require('./handlebars')
 
 var join = path.join
 
@@ -98,16 +99,22 @@ function parsePartials(options, fn) {
 
 function render(str, options, partials) {
     return new Promise((resolve, reject) => {
+        const helpers = {
+            ...defaultHelpers,
+            ...options.helpers,
+        }
+
         try {
             for (var partial in partials) {
                 handlebars.registerPartial(partial, partials[partial])
             }
-            for (var helper in options.helpers) {
-                handlebars.registerHelper(helper, options.helpers[helper])
+            for (var helper in helpers) {
+                handlebars.registerHelper(helper, helpers[helper])
             }
             var tmpl = cache(options) || cache(options, handlebars.compile(str, options))
             resolve(tmpl(options))
         } catch (err) {
+            err.message = 'PARTIAL RENDERING ERROR: ' + err.message
             reject(err)
         }
     })

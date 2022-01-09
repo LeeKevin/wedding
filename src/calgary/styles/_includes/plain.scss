@@ -1,0 +1,28 @@
+@import "../theme";
+
+h1, h2, h3, h4, h5 {
+  font-family: $header-font-family;
+  text-align: center;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+h2 {
+  margin: 1em 2em;
+
+  @media (max-device-width: 500px), (max-width: 520px) {
+    margin: 1em .5em;
+  }
+}
+
+p a {
+  border-bottom: 1px solid currentColor;
+}
+
+article {
+  margin-top: 3em;
+}
+
+.centered {
+  text-align: center;
+}

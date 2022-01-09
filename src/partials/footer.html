@@ -1,7 +1,15 @@
 <footer>
     <div class="container">
         <div>
-            {{siteName}} - 05.28.2022
+            {{siteName}} - {{styledShortDate}}
+        </div>
+        <div style="padding-top: 16px;">
+            {{#if_equal city "Calgary, AB"}}
+                <a href="/">Back to Sonoma</a>
+            {{else}}
+                <a href="/calgary">What could have been...</a>
+            {{/if_equal}}
         </div>
     </div>
 </footer>
+{{> login }}

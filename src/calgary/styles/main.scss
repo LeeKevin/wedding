@@ -14,7 +14,6 @@
 @import "_includes/footer";
 @import "_includes/buttons";
 @import "_includes/form";
-@import "_includes/login";
 
 html {
   height: 100%;
@@ -22,7 +21,6 @@ html {
 
 body {
   min-height: 100%;
-  position: relative;
 
   font-family: $font-family;
   color: $default-font-color;

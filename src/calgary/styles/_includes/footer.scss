@@ -1,0 +1,16 @@
+@import '../theme';
+
+footer {
+  font-size: 14px;
+  text-align: center;
+  margin-top: 60px;
+
+  border-top: 1px solid #313131;
+  padding: 16px 0;
+  color: #5d5d5d;
+  letter-spacing: 2px;
+
+  font-family: $header-font-family;
+  background: #ffffff;
+  position: relative;
+}

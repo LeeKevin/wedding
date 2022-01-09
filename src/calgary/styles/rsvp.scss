@@ -1,0 +1,190 @@
+@import "_includes/plain";
+
+p {
+  max-width: 500px;
+  margin: 0 auto 10px;
+}
+
+.event-table {
+  width: 200px;
+  margin: 0 auto 8px;
+
+  td {
+    text-align: left;
+  }
+
+  td:last-child {
+    text-align: right;
+  }
+}
+
+.rsvp-form {
+  margin-top: 24px;
+
+  p {
+    text-align: center;
+  }
+
+  @media (max-device-width: 500px), (max-width: 520px) {
+    padding: 0 24px;
+  }
+}
+
+.rsvp-code-form {
+  max-width: 400px;
+  display: flex;
+  margin: 0 auto;
+
+  input#rsvp-code {
+    padding: 8px 24px;
+    flex: 1;
+    margin-right: 16px;
+    text-align: center;
+  }
+
+  #rsvp-code-submit {
+    &[disabled] {
+      cursor: default;
+    }
+  }
+
+  @media (max-device-width: 450px), (max-width: 470px) {
+    flex-wrap: wrap;
+    input#rsvp-code {
+      margin-right: 0;
+      margin-bottom: 8px;
+    }
+
+    #rsvp-code-submit {
+      flex: 1;
+      min-width: 100%;
+    }
+  }
+}
+
+.error {
+  color: #c7133e;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.invitee {
+  margin-bottom: 16px;
+
+  &__name {
+    font-weight: bold;
+    margin-bottom: 8px;
+
+    a.edit-toggle {
+      margin-left: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      padding: 0 3px;
+    }
+
+    .edit-name-buttons {
+      max-width: 350px;
+      text-align: right;
+      margin: 8px auto 16px;
+
+      a {
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      a:not(:last-of-type) {
+        margin-right: 16px;
+      }
+    }
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    &::-ms-expand {
+      display: none;
+    }
+
+    width: 250px;
+    outline: none;
+    height: 36px;
+    text-indent: 12px;
+    border: 1px solid $default-font-color;
+    border-radius: 5px;
+    margin: 16px 0 8px;
+    font-size: 14px;
+    color: $default-font-color;
+  }
+
+  .select-input::after {
+    content: '\f078';
+    font-family: FontAwesome;
+    position: absolute;
+    margin-top: 23px;
+    margin-left: -24px;
+  }
+}
+
+.invitee-list {
+  text-align: center;
+  margin: 24px 0;
+
+  .button {
+    width: 200px;
+    cursor: pointer;
+
+    &:not(:last-of-type) {
+      margin-right: 16px;
+    }
+
+    @media (max-device-width: 480px), (max-width: 500px) {
+      padding: 10px 24px;
+      width: 145px;
+      letter-spacing: 0;
+
+      &:not(:last-of-type) {
+        margin-right: 8px;
+      }
+    }
+
+    @media (max-device-width: 380px), (max-width: 400px) {
+      padding: 8px 18px;
+      font-size: 12px;
+      width: auto;
+    }
+  }
+
+  input, textarea {
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 350px;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  a {
+    border-bottom: 1px solid currentColor;
+  }
+}
+
+.submit-rsvp {
+  margin-top: 30px;
+
+  > div {
+    background: #fff;
+  }
+
+  &__float {
+    padding: 12px 20px;
+    text-align: center;
+    width: 100%;
+    border-top: 1px solid $default-font-color;
+    transition: all 0.6s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  }
+}

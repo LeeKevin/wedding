@@ -1,0 +1,29 @@
+
+$spacing: 12px;
+$speed: 100ms;
+$easing: ease-in-out;
+
+.accordion-tab {
+  overflow: hidden;
+  transition: height $speed $easing;
+
+  &__summary,
+  &__content {
+    padding: $spacing;
+  }
+
+  &__content {
+    padding-top: 0;
+    padding-left: 26px;
+  }
+
+  &__summary {
+    position: relative;
+    padding-left: 24px;
+    text-indent: -23px;
+    outline: 0;
+    cursor: pointer;
+    transition: color $speed $easing;
+    font-weight: bold;
+  }
+}

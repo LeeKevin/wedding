@@ -3,10 +3,10 @@
     <div class="container">
         <div class="header-text">
             <div style="margin-right: 16px;">
-                May 28, 2022
+                {{shortDate}}
             </div>
             <div style="margin-right: 16px;">
-                Calgary, AB
+                {{city}}
             </div>
             <div>
                 <a href="https://www.instagram.com/explore/tags/janelleandkevin/">
@@ -17,7 +17,7 @@
     </div>
     <div class="header-container">
         <div class="container logo">
-            <a href="/" style="border: none;">
+            <a href="{{root}}/" style="border: none;">
                 <span class="logo__name">Janelle</span>
                 <span class="logo__and">and</span>
                 <span class="logo__name">Kevin</span>
@@ -28,13 +28,13 @@
         <div id="header-menu" class="header-container">
             <div class="container header">
                 <div class="header-menu--contents">
-                    <a class="item" href="/">Home</a>
-                    <a class="item" href="/schedule">Schedule</a>
-                    <a class="item" href="/photos">Photos</a>
-                    <a class="item" href="/accommodations">Accom.</a>
-                    <a class="item" href="/things-to-do">Things to do</a>
-                    <a class="item" href="/registry">Registry</a>
-                    <a class="item" href="/rsvp">RSVP</a>
+                    <a class="item" href="{{root}}/">Home</a>
+                    <a class="item" href="{{root}}/schedule">Schedule</a>
+                    <a class="item" href="{{root}}/photos">Photos</a>
+                    <a class="item" href="{{root}}/accommodations">Accom.</a>
+                    <a class="item" href="{{root}}/things-to-do">Things to do</a>
+                    <a class="item" href="{{root}}/registry">Registry</a>
+                    <a class="item" href="{{root}}/rsvp">RSVP</a>
                 </div>
 
                 <div class="header-menu--mobile">
@@ -52,17 +52,18 @@
         </div>
     </div>
 </header>
+{{#if_equal city "Calgary, AB"}}
 <div class="container">
-    <div class="covid-banner">
+    <div class="warning-banner">
         <i class="fa fa-warning"></i>
         <div>
             <p>
-                Due to the continuing COVID-19 pandemic, we have decided to further postpone our wedding
-                to Saturday May 28, 2022.
-            </p>
-            <p>
-                We're looking forward to celebrating with everyone next year!
+                Due to the continuing COVID-19 pandemic and our visa travel restrictions, we have decided to change our
+                wedding plans to have a more intimate celebration with family in <a href="/"
+            >California</a>.
             </p>
         </div>
     </div>
 </div>
+{{/if_equal}}
+

@@ -226,7 +226,7 @@ $toggle-menu-section-border: 1px solid #e7e7e7;
   }
 }
 
-.warning-banner {
+.covid-banner {
   padding: 4px;
   max-width: 1000px;
   margin: 16px auto 0;
@@ -244,10 +244,6 @@ $toggle-menu-section-border: 1px solid #e7e7e7;
   .fa {
     font-size: 20px;
     margin: 0 32px;
-  }
-
-  a {
-    border-bottom: 1px solid currentColor;
   }
 
   > div {

@@ -7,7 +7,7 @@ const concat = require('gulp-concat')
 const sourcemaps = require('gulp-sourcemaps')
 const autoprefixer = require('gulp-autoprefixer')
 const rev = require('gulp-rev')
-const prettyUrl = require("gulp-pretty-url")
+const prettyUrl = require('gulp-pretty-url')
 const cached = require('gulp-cached')
 const cache = require('gulp-memory-cache')
 const uglify = require('gulp-uglify')
@@ -25,13 +25,13 @@ const browserify = require('browserify')
 const watchify = require('watchify')
 const babel = require('babelify')
 const argv = require('yargs').argv
-
-const settings = require('./settings')
+const sha512 = require('js-sha512')
 
 const gulpPartials = require('./build/gulp-partials')
+const getDateVars = require('./build/helpers/get-date-vars')
 
 const PARTIALS_DIR = './src/partials'
-const isProduction = argv && argv.production === true;
+const isProduction = argv && argv.production === true
 console.log('Is Production? ' + (isProduction ? 'Yes' : 'No'))
 
 const pageTasks = {
@@ -59,6 +59,32 @@ const pageTasks = {
                 return generateHtmlGulpStream('photos', './public', { permalinks: true, isRefresh, data })
             })
     },
+    calgary: (isRefresh) => Promise.all([
+        generateHtmlGulpStream('index', './public/calgary', { isRefresh, src: '/calgary' }),
+        generateHtmlGulpStream('rsvp', './public/calgary', { permalinks: true, isRefresh, src: '/calgary' }),
+        generateHtmlGulpStream('schedule', './public/calgary', { permalinks: true, isRefresh, src: '/calgary' }),
+        generateHtmlGulpStream('accommodations',
+            './public/calgary',
+            { permalinks: true, isRefresh, src: '/calgary' }),
+        generateHtmlGulpStream('things-to-do',
+            './public/calgary',
+            { permalinks: true, isRefresh, src: '/calgary' }),
+        generateHtmlGulpStream('registry', './public/calgary', { permalinks: true, isRefresh, src: '/calgary' }),
+        globby(['./src/images/photos/*'])
+            .then((paths) => {
+                const data = { images: [] }
+                paths.sort().map(function map(item) {
+                    data.images.push(`/${path.relative('./src', item)}`)
+                })
+
+                return data
+            })
+            .then((data) => {
+                return generateHtmlGulpStream('photos',
+                    './public/calgary',
+                    { permalinks: true, isRefresh, data, src: '/calgary' })
+            })
+    ])
 }
 const pageWatcherFiles = Object.keys(pageTasks).reduce((watcher, taskName) => ({
     ...watcher, [taskName]: [
@@ -149,19 +175,20 @@ gulp.task('build', gulp.series(
 ))
 
 function generateHtmlGulpStream(name, dest, options) {
-    const templateFile = `./src/templates/${name}.html`
+    const srcPath = `./src${options.src || ''}`
+    const templateFile = `${srcPath}/templates/${name}.html`
     if (!fs.existsSync(templateFile)) {
         return null
     }
 
-    const style = `./src/styles/${name}.scss`
-    const styles = ['./src/styles/main.scss']
+    const style = `${srcPath}/styles/${name}.scss`
+    const styles = [`${srcPath}/styles/main.scss`]
     if (fs.existsSync(style)) {
         styles.push(style)
     }
 
-    const script = `./src/js/${name}.js`
-    const scripts = ['./src/js/main.js']
+    const script = `${srcPath}/js/${name}.js`
+    const scripts = [`${srcPath}/js/main.js`]
     if (fs.existsSync(script)) {
         scripts.push(script)
     }
@@ -176,7 +203,7 @@ function generateHtmlGulpStream(name, dest, options) {
         .pipe(concat(`${name}.css`))
         .pipe(gulpif(isProduction, rev()))
         .pipe(gulpif(!isProduction, sourcemaps.write()))
-        .pipe(gulp.dest('./public'))
+        .pipe(gulp.dest(dest))
 
     const isRefresh = options && options.isRefresh
     const isWatch = process.env.IS_GULP_WATCH == 'true'
@@ -216,7 +243,7 @@ function generateHtmlGulpStream(name, dest, options) {
                 .pipe(gulpif(isProduction, uglify()))
                 .pipe(gulpif(!isProduction, sourcemaps.write()))
                 .pipe(gulpif(isWatch, cache(`${name}-js`)))
-                .pipe(gulp.dest('./public'))
+                .pipe(gulp.dest(dest))
         }
 
         bundler.on('update', function () {
@@ -231,9 +258,20 @@ function generateHtmlGulpStream(name, dest, options) {
     }
 
     return new Promise((resolve, reject) => {
+        const settings = require(`${srcPath}/settings`)
+        const dateVars = getDateVars(settings.date)
+
         let stream = gulp
             .src(templateFile)
-            .pipe(gulpPartials(PARTIALS_DIR, { ...settings, ...(options && options.data || {}) }))
+            .pipe(gulpPartials(PARTIALS_DIR, {
+                ...dateVars,
+                ...settings,
+                root: options.src,
+                match: settings.salt ?
+                    sha512(process.env.PASSWORD.toLowerCase().replace(/[^\w]/g, '') + settings.salt) :
+                    undefined,
+                ...(options && options.data || {})
+            }))
             .pipe(inject(cssStream, { ignorePath: 'public/', addRootSlash: true, removeTags: true }))
             .pipe(inject(jsStream, { ignorePath: 'public/', addRootSlash: true, removeTags: true }))
 

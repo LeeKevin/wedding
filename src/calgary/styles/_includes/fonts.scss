@@ -1,0 +1,171 @@
+$fa-font-path: "fonts/";
+@import "font-awesome/scss/font-awesome";
+
+@font-face {
+  font-family: 'Tenez';
+  src: url('/fonts/Tenez-Light.eot');
+  src: url('/fonts/Tenez-Light.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/Tenez-Light.woff2') format('woff2'),
+  url('/fonts/Tenez-Light.woff') format('woff'),
+  url('/fonts/Tenez-Light.ttf') format('truetype'),
+  url('/fonts/Tenez-Light.svg#Tenez-Light') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tenez';
+  src: url('/fonts/Tenez-Regular.eot');
+  src: url('/fonts/Tenez-Regular.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/Tenez-Regular.woff2') format('woff2'),
+  url('/fonts/Tenez-Regular.woff') format('woff'),
+  url('/fonts/Tenez-Regular.ttf') format('truetype'),
+  url('/fonts/Tenez-Regular.svg#Tenez-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tenez';
+  src: url('/fonts/Tenez-Italic.eot');
+  src: url('/fonts/Tenez-Italic.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/Tenez-Italic.woff2') format('woff2'),
+  url('/fonts/Tenez-Italic.woff') format('woff'),
+  url('/fonts/Tenez-Italic.ttf') format('truetype'),
+  url('/fonts/Tenez-Italic.svg#Tenez-Italic') format('svg');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Tenez';
+  src: url('/fonts/Tenez-Black.eot');
+  src: url('/fonts/Tenez-Black.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/Tenez-Black.woff2') format('woff2'),
+  url('/fonts/Tenez-Black.woff') format('woff'),
+  url('/fonts/Tenez-Black.ttf') format('truetype'),
+  url('/fonts/Tenez-Black.svg#Tenez-Black') format('svg');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tenez';
+  src: url('/fonts/Tenez-LightItalic.eot');
+  src: url('/fonts/Tenez-LightItalic.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/Tenez-LightItalic.woff2') format('woff2'),
+  url('/fonts/Tenez-LightItalic.woff') format('woff'),
+  url('/fonts/Tenez-LightItalic.ttf') format('truetype'),
+  url('/fonts/Tenez-LightItalic.svg#Tenez-LightItalic') format('svg');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Tenez';
+  src: url('/fonts/Tenez-Bold.eot');
+  src: url('/fonts/Tenez-Bold.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/Tenez-Bold.woff2') format('woff2'),
+  url('/fonts/Tenez-Bold.woff') format('woff'),
+  url('/fonts/Tenez-Bold.ttf') format('truetype'),
+  url('/fonts/Tenez-Bold.svg#Tenez-Bold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Baskerville';
+  src: url('/fonts/Baskerville-Bold.eot');
+  src: url('/fonts/Baskerville-Bold.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/Baskerville-Bold.woff2') format('woff2'),
+  url('/fonts/Baskerville-Bold.woff') format('woff'),
+  url('/fonts/Baskerville-Bold.ttf') format('truetype'),
+  url('/fonts/Baskerville-Bold.svg#Baskerville-Bold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Baskerville';
+  src: url('/fonts/Baskerville-SemiBold.eot');
+  src: url('/fonts/Baskerville-SemiBold.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/Baskerville-SemiBold.woff2') format('woff2'),
+  url('/fonts/Baskerville-SemiBold.woff') format('woff'),
+  url('/fonts/Baskerville-SemiBold.ttf') format('truetype'),
+  url('/fonts/Baskerville-SemiBold.svg#Baskerville-SemiBold') format('svg');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Baskerville';
+  src: url('/fonts/Baskerville.eot');
+  src: url('/fonts/Baskerville.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/Baskerville.woff2') format('woff2'),
+  url('/fonts/Baskerville.woff') format('woff'),
+  url('/fonts/Baskerville.ttf') format('truetype'),
+  url('/fonts/Baskerville.svg#Baskerville') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Batrisyia Script Alternates';
+  src: url('/fonts/BatrisyiaScript-Alternates.eot');
+  src: url('/fonts/BatrisyiaScript-Alternates.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/BatrisyiaScript-Alternates.woff2') format('woff2'),
+  url('/fonts/BatrisyiaScript-Alternates.woff') format('woff'),
+  url('/fonts/BatrisyiaScript-Alternates.ttf') format('truetype'),
+  url('/fonts/BatrisyiaScript-Alternates.svg#BatrisyiaScript-Alternates') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Publico Text Roman';
+  src: url('/fonts/PublicoText-Roman.eot');
+  src: url('/fonts/PublicoText-Roman.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/PublicoText-Roman.woff2') format('woff2'),
+  url('/fonts/PublicoText-Roman.woff') format('woff'),
+  url('/fonts/PublicoText-Roman.ttf') format('truetype'),
+  url('/fonts/PublicoText-Roman.svg#PublicoText-Roman') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Publico Text Roman';
+  src: url('/fonts/PublicoText-Bold.eot');
+  src: url('/fonts/PublicoText-Bold.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/PublicoText-Bold.woff2') format('woff2'),
+  url('/fonts/PublicoText-Bold.woff') format('woff'),
+  url('/fonts/PublicoText-Bold.ttf') format('truetype'),
+  url('/fonts/PublicoText-Bold.svg#PublicoText-Bold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Publico Text Roman';
+  src: url('/fonts/PublicoText-BoldItalic.eot');
+  src: url('/fonts/PublicoText-BoldItalic.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/PublicoText-BoldItalic.woff2') format('woff2'),
+  url('/fonts/PublicoText-BoldItalic.woff') format('woff'),
+  url('/fonts/PublicoText-BoldItalic.ttf') format('truetype'),
+  url('/fonts/PublicoText-BoldItalic.svg#PublicoText-BoldItalic') format('svg');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Publico Text Roman';
+  src: url('/fonts/PublicoText-Italic.eot');
+  src: url('/fonts/PublicoText-Italic.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/PublicoText-Italic.woff2') format('woff2'),
+  url('/fonts/PublicoText-Italic.woff') format('woff'),
+  url('/fonts/PublicoText-Italic.ttf') format('truetype'),
+  url('/fonts/PublicoText-Italic.svg#PublicoText-Italic') format('svg');
+  font-weight: normal;
+  font-style: italic;
+}
+

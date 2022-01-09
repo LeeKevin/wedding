@@ -36,13 +36,12 @@ function gulpPartials(partialPath, opts) {
         render(contents, options)
             .then((str) => {
                 target.contents = new Buffer(str)
-            })
-            .catch(err => {
+                next()
+            }, err => {
                 next(err)
             })
 
         this.push(target)
-        next()
     })
 }
 
