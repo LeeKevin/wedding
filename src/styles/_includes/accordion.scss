@@ -14,13 +14,13 @@ $easing: ease-in-out;
 
   &__content {
     padding-top: 0;
-    padding-left: 26px;
+    padding-left: 24px;
   }
 
   &__summary {
     position: relative;
     padding-left: 24px;
-    text-indent: -23px;
+    text-indent: -20px;
     outline: 0;
     cursor: pointer;
     transition: color $speed $easing;
