@@ -44,7 +44,6 @@ const pageTasks = {
     ['things-to-do']: (isRefresh) => generateHtmlGulpStream('things-to-do',
         './public',
         { permalinks: true, isRefresh }),
-    registry: (isRefresh) => generateHtmlGulpStream('registry', './public', { permalinks: true, isRefresh }),
     photos: (isRefresh) => {
         return globby(['./src/images/photos/*'])
             .then((paths) => {
@@ -69,7 +68,6 @@ const pageTasks = {
         generateHtmlGulpStream('things-to-do',
             './public/calgary',
             { permalinks: true, isRefresh, src: '/calgary' }),
-        generateHtmlGulpStream('registry', './public/calgary', { permalinks: true, isRefresh, src: '/calgary' }),
         globby(['./src/images/photos/*'])
             .then((paths) => {
                 const data = { images: [] }
