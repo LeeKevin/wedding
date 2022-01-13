@@ -439,6 +439,20 @@ class RSVP extends React.Component {
             invitee,
             isComplete,
         } = this.state
+
+        return <div>
+            <p>
+                We're excited to celebrate with you! We truly hope you can join us. Please RSVP by&nbsp;
+                <strong style={{ display: 'inline-block' }}>{weddingDate.minus({ months: 2 })
+                                                                        .toLocaleString(DateTime.DATE_FULL)}</strong>.
+            </p>
+            <p>
+                We're currently getting this RSVP form ready. In the
+                meantime, <a href="mailto:hello@janelleandkevin.com">send
+                Janelle and Kevin a quick email</a> or message them via text/Facebook whether or not you plan to attend.
+            </p>
+        </div>
+
         return <div>
             {
                 isComplete
@@ -449,7 +463,8 @@ class RSVP extends React.Component {
                     : <div>
                         <p>
                             We're excited to celebrate with you! We truly hope you can join us. Please RSVP by&nbsp;
-                            <strong style={{ display: 'inline-block' }}>{weddingDate.minus({ months: 2 }).toLocaleString(DateTime.DATE_FULL)}</strong>.
+                            <strong style={{ display: 'inline-block' }}>{weddingDate.minus({ months: 2 })
+                                                                                    .toLocaleString(DateTime.DATE_FULL)}</strong>.
                         </p>
                         {
                             invitee
