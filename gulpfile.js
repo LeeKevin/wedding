@@ -58,6 +58,9 @@ const pageTasks = {
                 return generateHtmlGulpStream('photos', './public', { permalinks: true, isRefresh, data })
             })
     },
+    registry: (isRefresh) => generateHtmlGulpStream('registry',
+        './public',
+        { permalinks: true, isRefresh }),
     calgary: (isRefresh) => Promise.all([
         generateHtmlGulpStream('index', './public/calgary', { isRefresh, src: '/calgary' }),
         generateHtmlGulpStream('rsvp', './public/calgary', { permalinks: true, isRefresh, src: '/calgary' }),
