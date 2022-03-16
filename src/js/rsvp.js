@@ -4,18 +4,18 @@ import { fetch, get } from './_includes/fetch'
 import { DateTime } from 'luxon'
 import settings from '../settings'
 
-const apiURL = 'https://script.google.com/macros/s/AKfycbyj6iA6nUQEwM04FLJ7Ao3RRPMS_0DthX-wdY4aL7Vhv2jIAqo/exec'
+const apiURL = 'https://script.google.com/macros/s/AKfycbxQfiEvB1JMGjkP2He2dxtObyySJz7RHGcN4df0s1Lz5J_McfZytC9r_jnJGRGtpR0l/exec'
 
 const weddingDate = DateTime.fromISO(settings.date)
 
-const getDefaultInviteeResponse = (id, name, plusone) => ({
+const getDefaultInviteeResponse = (id, name, isKid = false) => ({
     date: new Date().toISOString(),
     id,
     originalName: name,
-    name: plusone ? '' : name,
+    name,
     willAttend: null,
     mealOption: null,
-    plusone,
+    isKid,
 })
 
 class InviteResponse extends React.PureComponent {
@@ -64,6 +64,38 @@ class InviteResponse extends React.PureComponent {
         this.toggleEdit()
     }
 
+    renderMealDescription = (option) => {
+        switch (option) {
+            case 'Beef':
+                return <div className="meal-description">
+                    <div className="meal-title">Red wine braised short rib</div>
+                    <div className="meal-subtitle">
+                        Onion Soubise, Grilled Leek, Potato Pavé
+                    </div>
+                </div>
+            case 'Salmon':
+                return <div className="meal-description">
+                    <div className="meal-title">
+                        Pacific King Salmon
+                    </div>
+                    <div className="meal-subtitle">
+                        Bearnaise Mousse, Potato Confit, Spring Beans, Tarragon Glass
+                    </div>
+                </div>
+            case 'Panisse':
+                return <div className="meal-description">
+                    <div className="meal-title">
+                        Crispy panisse
+                    </div>
+                    <div className="meal-subtitle">
+                        Summer Romesco, Charred Vegetables, Pea Shoots, Herb Oil
+                    </div>
+                </div>
+            default:
+                return null
+        }
+    }
+
     render() {
         const { response } = this.props
         const { edit } = this.state
@@ -109,39 +141,61 @@ class InviteResponse extends React.PureComponent {
                 </a>
             </div>
             {
-                !!response.willAttend &&
-                <div className="select-input">
-                    <select value={response.mealOption || ''} onChange={this.handleMealOption}>
-                        <option value="">
-                            Select Meal Option
-                        </option>
-                        <option value="Beef">
-                            Braised Beef Short Rib
-                        </option>
-                        <option value="Duck">
-                            Confit Duck Leg
-                        </option>
-                        <option value="Mushroom">
-                            Wild Mushroom Ravioli (V)
-                        </option>
-                        <option value="Kids">
-                            Kid's Option (TBD)
-                        </option>
-                    </select>
-                </div>
+                !!response.willAttend && <>
+                    <div className="select-input">
+                        <select value={response.mealOption || ''} onChange={this.handleMealOption}>
+                            <option value="">
+                                Select Meal Option
+                            </option>
+                            {
+                                response.isKid ? <>
+                                        <option value="Kids">
+                                            Kid's Option (TBD)
+                                        </option>
+                                        <option value="No meal">
+                                            No meal needed
+                                        </option>
+                                    </> :
+                                    <>
+                                        <option value="Beef">
+                                            Braised Beef Short Rib
+                                        </option>
+                                        <option value="Salmon">
+                                            Salmon Bearnaise
+                                        </option>
+                                        <option value="Panisse">
+                                            Crispy Panisse (V)
+                                        </option>
+                                    </>
+                            }
+                        </select>
+                    </div>
+                    {
+                        response.mealOption ? this.renderMealDescription(response.mealOption) : null
+                    }
+                </>
+
             }
         </div>
     }
 }
 
 class RSVP extends React.Component {
-    state = {
-        code: '',
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            code: localStorage.getItem('rsvp') || '',
+        }
     }
 
     componentDidMount() {
         window.addEventListener('scroll', this.handleFloatingSubmit)
         window.addEventListener('resize', this.handleFloatingSubmit)
+
+        if (this.state.code) {
+            this.handleCode()
+        }
     }
 
     handleFloatingSubmit = () => {
@@ -196,17 +250,20 @@ class RSVP extends React.Component {
                     return
                 }
 
-                const { name: nameList } = response
+                const { names: nameList, kids: kidList } = response
                 const responses = {}
-                const names = nameList.split(',').map(name => name.trim())
+                const names = nameList.map(name => name.trim())
+                const kids = new Set(kidList.map(kid => kid.trim()))
                 response.responses.forEach(res => {
                     responses[res.originalName] = res
                 })
                 names.forEach(name => {
                     if (!responses[name]) {
-                        responses[name] = getDefaultInviteeResponse(response.id, name)
+                        responses[name] = getDefaultInviteeResponse(response.id, name, kids.has(name))
                     }
                 })
+
+                localStorage.setItem('rsvp', code)
 
                 this.setState({
                     isProcessingCode: false,
@@ -258,7 +315,7 @@ class RSVP extends React.Component {
             isSubmitting: true,
         })
 
-        fetch(`https://cors-anywhere.herokuapp.com/${apiURL}`, {
+        fetch(`https://cryptic-inlet-64432.herokuapp.com/${apiURL}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'text/plain',
@@ -296,22 +353,24 @@ class RSVP extends React.Component {
 
         return <div>
             <p>
-                Please enter your RSVP code provided on your invitation to unlock your RSVP form.
-                If you're responding for you and a guest (or your family), you'll be able to RSVP for your entire group.
+                Please enter your name. If you're responding for you and a guest (or your family), you'll be able to
+                RSVP for your entire group.
             </p>
             <div className="rsvp-code-form">
-                <input id="rsvp-code"
-                       type="text"
-                       placeholder="RSVP Invitation Code"
-                       value={code}
-                       onChange={this.handleCodeInput}
-                       onKeyPress={(e) => {
-                           if (e.keyCode === 13 || e.which === 13) {
-                               this.handleCode()
-                           }
-                       }}
+                <input
+                    id="rsvp-code"
+                    type="text"
+                    placeholder="Name"
+                    value={code}
+                    onChange={this.handleCodeInput}
+                    onKeyPress={(e) => {
+                        if (e.keyCode === 13 || e.which === 13) {
+                            this.handleCode()
+                        }
+                    }}
+                    disabled={isProcessingCode}
                 />
-                <button id="rsvp-code-submit" disabled={!code} onClick={this.handleCode}>
+                <button id="rsvp-code-submit" disabled={!code || isProcessingCode} onClick={this.handleCode}>
                     {isProcessingCode ? 'Processing...' : 'Continue'}
                 </button>
             </div>
@@ -334,10 +393,6 @@ class RSVP extends React.Component {
             isSubmitting,
         } = this.state
 
-        const extraResponses = Object
-            .values(responses)
-            .filter(response => !response.originalName || response.plusone)
-        const expectedExtraResponses = invitee.reserved - names.length
         const details = responses[names[0]] || {}
 
         return <div className="invitee-list">
@@ -349,13 +404,6 @@ class RSVP extends React.Component {
                 names
                     .map(name => this.renderInvitee(
                         responses[name] || getDefaultInviteeResponse(invitee.id, name))
-                    )
-            }
-            {
-                Array(expectedExtraResponses)
-                    .fill(null)
-                    .map((_, i) => this.renderInvitee(
-                        extraResponses[i] || getDefaultInviteeResponse(invitee.id, `extra-${i}`, true))
                     )
             }
             <div style={{ marginBottom: 16 }}>
@@ -383,8 +431,8 @@ class RSVP extends React.Component {
                 />
             </div>
             <div style={{ marginBottom: 16 }}>
-                <div style={{ fontWeight: 'bold', marginBottom: 8 }}>
-                    Attending <a href="{{root}}/schedule/#brunch" target="_blank">Sunday Brunch</a>?
+                <div style={{ fontWeight: 'bold', marginBottom: 12 }}>
+                    Attending <a href="{{root}}/schedule/#breakfast" target="_blank">Monday Breakfast</a>?
                 </div>
                 <div>
                     <a
@@ -395,7 +443,7 @@ class RSVP extends React.Component {
                         })}
                         data-selected={details.brunch === 1}
                     >
-                        Brunching
+                        Breaking (attending)
                     </a>
                     <a
                         className="button"
@@ -405,7 +453,7 @@ class RSVP extends React.Component {
                         })}
                         data-selected={details.brunch === 0}
                     >
-                        Not Brunching
+                        Fasting <br/>(not attending)
                     </a>
                 </div>
             </div>
@@ -418,13 +466,16 @@ class RSVP extends React.Component {
                         left: hasFloatingSubmit ? 0 : null,
                     }}
                 >
-                    <a
-                        className="button"
-                        onClick={this.submitRsvp}
-                    >
-                        {isSubmitting ? 'Submitting...' : 'Submit RSVP'}
-                    </a>
-
+                    {
+                        weddingDate.minus({ months: 1, weeks: 2 }).diffNow('days') < 0 ?
+                            <i>RSVP changes unavailable</i>
+                            : <a
+                                className="button"
+                                onClick={this.submitRsvp}
+                            >
+                                {isSubmitting ? 'Submitting...' : 'Submit RSVP'}
+                            </a>
+                    }
                     {
                         error && hasFloatingSubmit && <div className="error">{error}</div>
                     }
@@ -441,29 +492,17 @@ class RSVP extends React.Component {
         } = this.state
 
         return <div>
-            <p>
-                We're excited to celebrate with you! We truly hope you can join us. Please RSVP by&nbsp;
-                <strong style={{ display: 'inline-block' }}>{weddingDate.minus({ months: 2 })
-                                                                        .toLocaleString(DateTime.DATE_FULL)}</strong>.
-            </p>
-            <p>
-                We're currently getting this RSVP form ready. In the
-                meantime, <a href="mailto:hello@janelleandkevin.com">send
-                Janelle and Kevin a quick email</a> or message them via text/Facebook whether or not you plan to attend.
-            </p>
-        </div>
-
-        return <div>
             {
                 isComplete
                     ? <p>
                         Thank you for your RSVP. You can revisit this page to check or update your RSVP
-                        details until <strong>{weddingDate.minus({ months: 1 }).toLocaleString(DateTime.DATE_FULL)}</strong>.
+                        details until <strong>{weddingDate.minus({ months: 1, weeks: 2 })
+                                                          .toLocaleString(DateTime.DATE_FULL)}</strong>.
                     </p>
                     : <div>
                         <p>
                             We're excited to celebrate with you! We truly hope you can join us. Please RSVP by&nbsp;
-                            <strong style={{ display: 'inline-block' }}>{weddingDate.minus({ months: 2 })
+                            <strong style={{ display: 'inline-block' }}>{weddingDate.minus({ months: 1, weeks: 3 })
                                                                                     .toLocaleString(DateTime.DATE_FULL)}</strong>.
                         </p>
                         {

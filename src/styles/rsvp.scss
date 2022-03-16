@@ -125,6 +125,24 @@ p {
     margin-top: 23px;
     margin-left: -24px;
   }
+
+  .meal-description {
+    display: inline-block;
+    padding: 16px;
+    border-radius: 4px;
+    background: #ebebeb;
+    margin-top: 8px;
+    font-family: 'Tenez';
+
+    .meal-title {
+      text-transform: uppercase;
+      padding-bottom: 4px;
+    }
+
+    .meal-subtitle {
+      font-size: 14px;
+    }
+  }
 }
 
 .invitee-list {
