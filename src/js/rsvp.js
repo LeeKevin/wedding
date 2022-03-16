@@ -501,7 +501,7 @@ class RSVP extends React.Component {
                     </p>
                     : <div>
                         <p>
-                            We're excited to celebrate with you! We truly hope you can join us. Please RSVP by&nbsp;
+                            We're excited to celebrate with you! Please RSVP by&nbsp;
                             <strong style={{ display: 'inline-block' }}>{weddingDate.minus({ months: 1, weeks: 3 })
                                                                                     .toLocaleString(DateTime.DATE_FULL)}</strong>.
                         </p>
