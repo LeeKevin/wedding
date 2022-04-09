@@ -73,13 +73,13 @@ class InviteResponse extends React.PureComponent {
                         Onion Soubise, Grilled Leek, Potato Pavé
                     </div>
                 </div>
-            case 'Salmon':
+            case 'Fish':
                 return <div className="meal-description">
                     <div className="meal-title">
-                        Pacific King Salmon
+                        Butter-basted seasonal fish
                     </div>
                     <div className="meal-subtitle">
-                        Bearnaise Mousse, Potato Confit, Spring Beans, Tarragon Glass
+                        Corn Pudding, Tomato Salad, Herbed Gremolata
                     </div>
                 </div>
             case 'Panisse':
@@ -160,8 +160,8 @@ class InviteResponse extends React.PureComponent {
                                         <option value="Beef">
                                             Braised Beef Short Rib
                                         </option>
-                                        <option value="Salmon">
-                                            Salmon Bearnaise
+                                        <option value="Fish">
+                                            Butter-Basted Seasonal Fish
                                         </option>
                                         <option value="Panisse">
                                             Crispy Panisse (V)
